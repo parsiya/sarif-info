@@ -1,5 +1,5 @@
 import argparse
-from commands import stats
+from commands import split, stats
 from utils import get_results
 
 def parser():
@@ -16,6 +16,10 @@ def parser():
     # the flag is present.
     parser_stats.add_argument("--asc", "--ascending", action='store_false',
         help="sort the table by the number of findings")
+
+    parser_split = subparsers.add_parser("split",
+        help="split the sarif file by rule ID")
+    parser_split.add_argument("file", help="the SARIF file")
 
     parser_help = subparsers.add_parser("help", help="display help usage")
     return parser
@@ -38,6 +42,16 @@ def main():
             return
         except Exception as e:
             print(e)
+            return
+    
+    if args.subcmd == "split":
+        try:
+            # split the file
+            split(args.file)
+            return
+        except Exception as e:
+            print(e)
+            return
 
     # print the help if nothing is passed
     parsed.print_help()

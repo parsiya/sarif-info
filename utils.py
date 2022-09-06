@@ -28,7 +28,7 @@ def get_ruleids(results: List[Dict]) -> List[str]:
         rules[res["ruleId"]] = True
     return rules
 
-def get_results_by_ruleid(results: List[Dict]) -> Dict[str, List[Dict]]:
+def get_results_by_ruleid_slow(results: List[Dict]) -> Dict[str, List[Dict]]:
     """
     Get the results, grouped by ruleid. This is O(2n) but the code looks good
     and more importantly WORKS!
@@ -60,7 +60,7 @@ def get_rule_stats(results: List[Dict], descending=True) -> Dict[str, int]:
     return dict(sorted(stats.items(), key=lambda item: item[1], reverse=descending))
 
 
-def get_results_by_ruleid2(results: List[Dict]) -> Dict[str, List[Dict]]:
+def get_results_by_ruleid_fast(results: List[Dict]) -> Dict[str, List[Dict]]:
     """
     Get a dictionary where the key is the ruleID and the value a list of all
     results for that rule. This is O(n) because why not!
