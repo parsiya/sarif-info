@@ -60,7 +60,7 @@ def get_rule_stats(results: List[Dict], descending=True) -> Dict[str, int]:
     return dict(sorted(stats.items(), key=lambda item: item[1], reverse=descending))
 
 
-def get_rules_by_id2(results: List[Dict]) -> Dict[str, List[Dict]]:
+def get_results_by_ruleid2(results: List[Dict]) -> Dict[str, List[Dict]]:
     """
     Get a dictionary where the key is the ruleID and the value a list of all
     results for that rule. This is O(n) because why not!
