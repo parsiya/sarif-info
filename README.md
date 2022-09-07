@@ -23,6 +23,8 @@ one or more SARIF files.
 ```
 $ python3 sarif-info.py stats tests/test2.sarif
 
+List of analyzed files:
+/mnt/c/Users/Parsia/Desktop/git-stuff/sarif-info/tests/test2.sarif
 +-----------------------------------------------------------------------------------+-------+
 | rule ID                                                                           | count |
 +-----------------------------------------------------------------------------------+-------+
@@ -41,6 +43,9 @@ To sort the table in reverse (smaller counts first) use `--asc` or
 
 ```
 $ python3 sarif-info.py stats tests/test2.sarif --asc
+
+List of analyzed files:
+/mnt/c/Users/Parsia/Desktop/git-stuff/sarif-info/tests/test2.sarif
 +-----------------------------------------------------------------------------------+-------+
 | rule ID                                                                           | count |
 +-----------------------------------------------------------------------------------+-------+
