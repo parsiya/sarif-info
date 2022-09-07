@@ -3,20 +3,29 @@ from sarif import loader
 from prettytable import PrettyTable
 
 try:
-    from typing import List, Dict
+    from typing import List, Dict, Tuple
 except:
     pass
 
-def get_results(file: str) -> List[Dict]:
+def get_results(files: str) -> Tuple[List[Dict], List[str]]:
     """
-    Return the results from the SARIF file.
+    Return the results from the SARIF file(s).
     Arguments:
-        file: path to the file.
+        files: path to one file or a directory with one or more files.
     Returns:
         A list of results. One result represents one hit.
+        A list of input files.
     """
-    data = loader.load_sarif_file(file)
-    return data.get_results()
+
+    data = loader.load_sarif_files(files)
+
+    file_names = []
+    # get the names of the files
+    for file in data:
+        file_names.append(file.get_abs_file_path())
+
+    # data = loader.load_sarif_file(file)
+    return data.get_results(), file_names
 
 
 def get_ruleids(results: List[Dict]) -> List[str]:
@@ -36,7 +45,7 @@ def get_results_by_ruleid_slow(results: List[Dict]) -> Dict[str, List[Dict]]:
     # get a dictionary of ruleIDs.
     ruleids = get_ruleids(results)
 
-    # I dunno how this works, but it works!
+    # I dunno how this works, but it does!
     return {
         ruleid: [result for result in results if result["ruleId"] == ruleid]
         for ruleid in ruleids
@@ -78,12 +87,11 @@ def get_results_by_ruleid_fast(results: List[Dict]) -> Dict[str, List[Dict]]:
         # it does not exist.
         current_list = stats.get(ruleid, [])
         # append the new result to it.
-        # Note: append always returns None so we cannot use the return value.
+        # Note: append always returns None so don't use the return value.
         current_list.append(res)
         # store the current_list in the dictionary
         stats[ruleid] = current_list
     
-    # does this work?
     return stats
 
 

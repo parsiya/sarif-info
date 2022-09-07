@@ -5,8 +5,7 @@ was a pain to contribute to so I made my own utility. Work in progress.
 [sarif-tools]: https://github.com/microsoft/sarif-tools
 
 ## Installation
-We need the [Microsoft/sarif-tools][sarif-tools] package and
-[PrettyTable][prettytable].
+We need [Microsoft/sarif-tools][sarif-tools] and [PrettyTable][prettytable].
 
 [prettytable]: https://github.com/jazzband/prettytable
 
@@ -18,7 +17,8 @@ python3 -m pip install sarif-tools prettytable
 
 ### stats
 Prints a table of ruleIDs and their number of hits. By default, the table is
-sorted by count descending.
+sorted by count descending. You can pass a single file or a directory containing
+one or more SARIF files.
 
 ```
 $ python3 sarif-info.py stats tests/test2.sarif

@@ -17,17 +17,24 @@ def stats(file: str, sorted=True) -> str:
     Return the rules in the file along with their number of hits.
     The results are always sorted by number of hits.
     Arguments:
-        file: path to the SARIF file.
+        file: path to the file or a directory with one or more files.
         sorted: how the results should be sorted. If True (default), it will
             show the rules with the bigger hits first.
     Returns:
-        A string containing a table with the rules and their number of hits.
+        A string containing a list of files and a table with the rules and 
+        number of hits.
     """
-    # get the results
-    results = utils.get_results(file)
-    stats = utils.get_rule_stats(results, descending=sorted)
 
-    return utils.stats_to_table(stats, STATS_HEADERS)
+    # get the results
+    results, names = utils.get_results(file)
+    # list of analyzed files
+    output = "List of analyzed files:\n"
+    output += "\n".join(names)
+    # table
+    stats = utils.get_rule_stats(results, descending=sorted)
+    output += "\n" + utils.stats_to_table(stats, STATS_HEADERS)
+
+    return output
 
 
 
